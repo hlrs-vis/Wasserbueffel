@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Canvas Tiles</title>
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <style>
+      .map {
+        width: 100%;
+        height: 700px;
+      }
+    </style>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.webmanifest">
+  </head>
+  <body>
+     Flight date: 
+     <select id="imageDate">
+       <option value="2019_03">2019_03</option>
+       <option value="2019_05">2019_05</option>
+       <option value="2020_03">2020_03</option>
+       <option value="2020_04">2020_04</option>
+       <option value="2020_05" selected>2020_05</option>
+     </select>
+     
+        <label for="grid">
+          Render Grid
+          <input type="checkbox" id="render-grid">
+        </label>
+    <div id="map" class="map"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
