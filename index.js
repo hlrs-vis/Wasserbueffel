@@ -71,22 +71,22 @@ layers.push(
   })
 )
 var pos = transform([9.285, 48.984], 'EPSG:4326', 'EPSG:3857')
-for (i = 0; i < 100; i++) {
+for (i = 0; i < (2000/15.6); i++) {
   gridLines.push(
     new Feature(
       new LineString([pos, [pos[0]+800,pos[1]]])
     )
   );
-  pos[1] += 20;
+  pos[1] += 15.6;
 }
 var pos = transform([9.285, 48.984], 'EPSG:4326', 'EPSG:3857')
-for (i = 0; i < 40; i++) {
+for (i = 0; i < (800/15.6); i++) {
   gridLines.push(
     new Feature(
       new LineString([pos, [pos[0],pos[1]+2000]])
       )
     );
-    pos[0] += 20;
+    pos[0] += 15.6;
 }
 
 
