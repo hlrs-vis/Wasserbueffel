@@ -3,15 +3,18 @@ import Map from 'ol/Map';
 import Feature from 'ol/Feature';
 import { LineString, Point, Polygon } from 'ol/geom';
 import View from 'ol/View';
+import {defaults as defaultControls, ScaleLine} from 'ol/control';
 import TileLayer from 'ol/layer/Tile';
 import { OSM, TileDebug } from 'ol/source';
 import TileXYZ from 'ol/source/XYZ';
 import { transform } from 'ol/proj.js';
+import proj4 from 'proj4';
+import {register} from 'ol/proj/proj4';
+import sync from 'ol-hashed';
 
 import { Vector as VectorLayer } from 'ol/layer';
 import { TileJSON, Vector as VectorSource } from 'ol/source';
 import { Fill, Icon, Stroke, Style } from 'ol/style';
-
 
 
 var dates = [
@@ -23,6 +26,34 @@ var dates = [
 ];
 var renderGridCheckbox = document.getElementById('render-grid');
 var renderDebugCheckbox = document.getElementById('render-debug');
+
+ 
+
+proj4.defs('EPSG:25832','+proj=utm +zone=32 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
+register(proj4);
+
+var scaleType = 'scalebar';
+var scaleBarSteps = 4;
+var scaleBarText = true;
+var control;
+
+function scaleControl() {
+  if (scaleType === 'scaleline') {
+    control = new ScaleLine({
+      units: "metric"
+    });
+    return control;
+  }
+  control = new ScaleLine({
+    units:"metric",
+    bar: true,
+    steps: scaleBarSteps,
+    text: scaleBarText,
+    minWidth: 140
+  });
+  return control;
+}
+
 var layers = [];
 var gridLines = [];
 var i, ii;
@@ -39,23 +70,23 @@ layers.push(
     visible: false,
   })
 )
-var la = 9.280;
-var lo = 48.986;
-for (i = 0; i < 40; i++) {
+var pos = transform([9.285, 48.984], 'EPSG:4326', 'EPSG:3857')
+for (i = 0; i < 100; i++) {
   gridLines.push(
     new Feature(
-      new LineString([transform([la, lo], 'EPSG:4326', 'EPSG:3857'), transform([la + 0.016, lo], 'EPSG:4326', 'EPSG:3857')])
-    ));
-  lo += 0.0002;
+      new LineString([pos, [pos[0]+800,pos[1]]])
+    )
+  );
+  pos[1] += 20;
 }
-var la = 9.280;
-var lo = 48.986;
+var pos = transform([9.285, 48.984], 'EPSG:4326', 'EPSG:3857')
 for (i = 0; i < 40; i++) {
   gridLines.push(
     new Feature(
-      new LineString([transform([la, lo], 'EPSG:4326', 'EPSG:3857'), transform([la, lo + 0.016], 'EPSG:4326', 'EPSG:3857')])
-    ));
-  la += 0.00034;
+      new LineString([pos, [pos[0],pos[1]+2000]])
+      )
+    );
+    pos[0] += 20;
 }
 
 
@@ -75,6 +106,7 @@ layers.push(
   new VectorLayer({
     visible: false,
     source: new VectorSource({
+      projection: 'EPSG:3857',
       features: gridLines
     }),
     style: new Style({
@@ -88,6 +120,9 @@ layers.push(
 
 
 var map = new Map({
+  controls: defaultControls().extend([
+    scaleControl()
+  ]),
   layers: layers,
   target: 'map',
   view: new View({
@@ -96,6 +131,7 @@ var map = new Map({
     maxZoom: 23
   })
 });
+sync(map);
 
 /**
  *  * Handle checkbox change event.
