@@ -9,6 +9,17 @@
         width: 100%;
         height: 700px;
       }
+      #tools {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+#tools a {
+  display: inline-block;
+  padding: 0.5rem;
+  background: white;
+  cursor: pointer;
+}
     </style>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -26,14 +37,30 @@
      </select>
      
         <label for="grid">
-          Render Grid
+          10m Nord-Süd
           <input type="checkbox" id="render-grid">
+        </label>
+        <label for="gridRot">
+          10m rotiert
+          <input type="checkbox" id="render-grid-rot">
         </label>
         <label for="debugLabel">
           Render DebugLabels
           <input type="checkbox" id="render-debug">
         </label>
+        <label for="studyLabel">
+          Render Study Area
+          <input type="checkbox" checked='true' id="render-study">
+        </label>
+        <label for="editLabel">
+          Edit
+          <input type="checkbox"  id="edit-study">
+        </label>
     <div id="map" class="map"></div>
+    <div id="tools">
+      <a id="clear">Clear</a>
+      <a id="download" download="features.json">Download</a>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
