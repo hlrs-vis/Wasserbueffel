@@ -3,7 +3,8 @@
   <head>
     <title>Canvas Tiles</title>
     <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <!--script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script-->
+    <link rel="stylesheet" href="/styles/style.css">
     <style>
       .map {
         width: 100%;
@@ -33,7 +34,17 @@
        <option value="2019_05">2019_05</option>
        <option value="2020_03">2020_03</option>
        <option value="2020_04">2020_04</option>
-       <option value="2020_05" selected>2020_05</option>
+       <option value="2020_05">2020_05</option>
+       <option value="2020_06">2020_06</option>
+       <option value="2020_09">2020_09</option>
+       <option value="2024_07" selected>2024_07</option>
+     </select>
+     Birds date: 
+     <select id="birdsDate">
+       <option value="none">none</option>
+       <option value="22.05.2020">2020_05_22</option>
+       <option value="11.06.2020">2020_06_11</option>
+       <option value="12.06.2020" selected>2020_06_12</option>
      </select>
      
         <label for="grid">
