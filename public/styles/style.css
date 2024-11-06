@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1, h2 {
+    color: #2e7d32;
+}
+.tree-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 20px;
+}
+.tree {
+    width: 180px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+.tree img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+.tree-info {
+    font-size: 14px;
+    color: #555;
+}
+#tree-list div {
+    cursor: pointer;
+    border: 1px solid gray;
+    transition: border-color 0.2s;
+}
+
+#tree-list div[data-tree-id]:hover {
+    border-color: #333;
+}
